@@ -118,11 +118,11 @@ n_head = 6
 n_layer = 6
 block_size = 256
 dropout = 0.2
-device = 'mps'
+device = 'cpu' if not torch.cuda.is_available() else 'cuda'
 
 model = GPTLanguageModel()
 model = model.to(device)
-checkpoint = torch.load('malayalam_gpt_checkpoint_39000.pth', map_location=device)
+checkpoint = torch.load('malayalam_gpt_checkpoint_40000.pth', map_location=device)
 model.load_state_dict(checkpoint['model_state_dict'])
 model.eval()
 print("Model loaded successfully.")
